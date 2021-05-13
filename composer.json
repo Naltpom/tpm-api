@@ -43,6 +43,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
         "eleven-labs/api-service-bundle": "^0.4",
+        "gedmo/doctrine-extensions": "^3.0",
         "nelmio/cors-bundle": "^2.1",
         "oneup/flysystem-bundle": "^3.5",
         "php-http/guzzle6-adapter": "^2.0",
