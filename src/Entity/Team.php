@@ -3,15 +3,20 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\TeamRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass=TeamRepository::class)
+ * @ORM\Entity()
  */
 class Team
 {
+    use Behavior\BlameableTrait;
+    use Behavior\TimestampableTrait;
+    use Behavior\SoftDeletableTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -28,6 +33,16 @@ class Team
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity=TeamUser::class, mappedBy="team")
+     */
+    private $teamUsers;
+
+    public function __construct()
+    {
+        $this->teamUsers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -54,6 +69,36 @@ class Team
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TeamUser[]
+     */
+    public function getTeamUsers(): Collection
+    {
+        return $this->teamUsers;
+    }
+
+    public function addTeamUser(TeamUser $teamUser): self
+    {
+        if (!$this->teamUsers->contains($teamUser)) {
+            $this->teamUsers[] = $teamUser;
+            $teamUser->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeamUser(TeamUser $teamUser): self
+    {
+        if ($this->teamUsers->removeElement($teamUser)) {
+            // set the owning side to null (unless already changed)
+            if ($teamUser->getTeam() === $this) {
+                $teamUser->setTeam(null);
+            }
+        }
 
         return $this;
     }
