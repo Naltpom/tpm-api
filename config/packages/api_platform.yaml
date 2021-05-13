@@ -1,0 +1,18 @@
+api_platform:
+    title: 'TMP Api'
+    version: '%env(APP_VERSION)%'
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
+    formats:
+        json:     ['application/json']
+        jsonhal:  ['application/hal+json']
+        jsonld:   ['application/ld+json']
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]
+    enable_swagger_ui: false
+    enable_docs: false
+    collection:
+        pagination:
+            client_items_per_page: true
