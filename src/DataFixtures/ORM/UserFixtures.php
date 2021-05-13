@@ -16,10 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserFixtures extends Fixture implements ContainerAwareInterface
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    const LABEL = 'user-%s';
 
     /**
      * @var UserPasswordEncoderInterface
@@ -35,7 +32,6 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
      */
     public function setContainer(ContainerInterface $container = null)
     {
-        $this->container = $container;
         $this->encoder = $container->get('security.password_encoder');
     }
 
@@ -45,6 +41,8 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
     public function load(ObjectManager $manager)
     {
         foreach ($this->getData() as $key => $item) {
+            $slug = base64_encode($item['email']);
+
             $user = new User();
 
             $user
@@ -65,6 +63,7 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
             $this->encodePassword($user);
 
             $manager->persist($user);
+            $this->setReference(sprintf(self::LABEL, $slug), $user);
         }
 
         $manager->flush();
@@ -77,7 +76,12 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
                 'email' => 'bertrand.chauveau@gmail.com',
                 'roles' => ['ROLE_USER', 'ROLE_TEST'],
                 'password' => '85YCdaftq53E8M3Jn8jZ',
-            ]
+            ],
+            [
+                'email' => 'nathan.provost@gmail.com',
+                'roles' => ['ROLE_USER', 'ROLE_TEST'],
+                'password' => '85YCdaftq53E8M3Jn8jZ',
+            ],
         ];
     }
 
