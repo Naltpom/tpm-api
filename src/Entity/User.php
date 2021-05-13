@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,8 +9,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -41,11 +40,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      }
  *     }
  * )
- * 
+ *
  * @Gedmo\SoftDeleteable(fieldName="dateDeleted", hardDelete=false)
- * 
+ *
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
- * 
+ *
  * @ORM\Entity()
  */
 class User implements UserInterface
@@ -129,7 +128,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $token;
-    
+
     /**
      * @var \DateTime|null
      *
@@ -147,7 +146,7 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $lastLogin;
-    
+
     public function __construct()
     {
         $this->teamUsers = new ArrayCollection();
