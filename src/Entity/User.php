@@ -30,8 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     },
  *     itemOperations={
  *      "get"={
- *          "normalization_context"={"groups"={"user-list", "user-details", "soft-deletable", "timestampable"}},
- *          "security"="is_granted('ROLE_ADMIN') or object == user"
+ *          "normalization_context"={"groups"={"user-list", "user-details", "soft-deletable", "timestampable"}}
  *      },
  *      "put"={
  *          "normalization_context"={"groups"={"user-list", "user-details", "soft-deletable", "timestampable"}},
@@ -55,6 +54,8 @@ class User implements UserInterface
     use Behavior\SoftDeletableTrait;
 
     /**
+     * @ApiProperty(identifier=false)
+     * 
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -63,6 +64,8 @@ class User implements UserInterface
 
     /**
      * @var string
+     * 
+     * @Groups({"user-write", "user-list", "user-details", "team-details"})
      * 
      * @ORM\Column(type="string", length=180, unique=true)
      */
@@ -73,7 +76,7 @@ class User implements UserInterface
      *
      * @ApiProperty(identifier=true)
      *
-     * @Groups({"user-list"})
+     * @Groups({"user-list", "user-details", "team-details"})
      *
      * @ORM\Column(type="string", length=255)
      */
@@ -81,6 +84,8 @@ class User implements UserInterface
 
     /**
      * @var array
+     * 
+     * @Groups({"user-list", "user-details"})
      * 
      * @ORM\Column(type="json")
      */
@@ -94,6 +99,8 @@ class User implements UserInterface
 
     /**
      * @var array
+     * 
+     * @Groups({"user-write", "user-list", "user-details"})
      * 
      * @ORM\OneToMany(targetEntity=TeamUser::class, mappedBy="user", orphanRemoval=true)
      */
@@ -110,7 +117,7 @@ class User implements UserInterface
      *     }
      * )
      *
-     * @Groups({"user-list"})
+     * @Groups({"user-list", "user-details"})
      *
      * @ORM\Column(type="json")
      */
@@ -135,7 +142,7 @@ class User implements UserInterface
      *     }
      * )
      *
-     * @Groups({"user-list"})
+     * @Groups({"user-list", "user-details", "team-details"})
      *
      * @ORM\Column(type="datetime", nullable=true)
      */

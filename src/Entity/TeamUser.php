@@ -1,12 +1,39 @@
 <?php
 
 namespace App\Entity;
-
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * Class TeamUser.
+ *
+ * @ApiResource(
+ *     denormalizationContext={"groups"={"teamUser-write"}},
+ *     collectionOperations={
+ *      "get"={
+ *          "normalization_context"={"groups"={"teamUser-base", "teamUser-list", "blameable", "timestampable"}},
+ *      },
+ *      "post"={
+ *          "normalization_context"={"groups"={"teamUser-base", "teamUser-list", "teamUser-details", "blameable", "timestampable"}},
+ *          "security"="is_granted('ROLE_ADMIN')"
+ *      }
+ *     },
+ *     itemOperations={
+ *      "get"={
+ *          "normalization_context"={"groups"={"teamUser-base", "teamUser-list", "teamUser-details", "blameable", "timestampable"}}
+ *      },
+ *      "put"={
+ *          "normalization_context"={"groups"={"teamUser-base", "teamUser-list", "teamUser-details", "blameable", "timestampable"}},
+ *          "security"="is_granted('ROLE_ADMIN')"
+ *      },
+ *      "delete"={"security"="is_granted('ROLE_ADMIN')"}
+ *     }
+ * )
+ * 
  * @ORM\Entity()
  */
 class TeamUser
@@ -22,17 +49,23 @@ class TeamUser
     private $id;
 
     /**
+     * @Groups({"team-details"})
+     * 
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="teamUsers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
+     * @Groups({"user-details"})
+     * 
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="teamUsers")
      */
     private $team;
 
     /**
+     * @Groups({"team-details", "user-details"})
+     * 
      * @ORM\Column(type="json")
      */
     private $roles = [];
