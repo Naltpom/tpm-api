@@ -1,6 +1,10 @@
 api_platform:
     enable_swagger_ui: true
     enable_docs: true
+    swagger:
+        api_keys:
+            apiKey:
+                name: Authorization
+                type: header
     formats:
-        html: [ 'text/html' ]
-
+        html:     ['text/html']

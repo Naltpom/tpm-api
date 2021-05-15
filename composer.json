@@ -71,7 +71,6 @@
         "symfony/translation": "4.4.*",
         "symfony/twig-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
-        "symfony/workflow": "4.4.*",
         "symfony/yaml": "4.4.*",
         "twig/twig": "^2.0"
     },
