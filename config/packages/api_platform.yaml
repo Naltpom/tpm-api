@@ -10,9 +10,18 @@ api_platform:
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:
-        versions: [3]
+        versions: [2]
     enable_swagger_ui: false
     enable_docs: false
     collection:
         pagination:
             client_items_per_page: true
+    mercure:
+        # Enabled by default with installed symfony/mercure-bundle.
+        enabled: false
+
+        # The URL sent in the Link HTTP header. If not set, will default to MercureBundle's default hub URL.
+        hub_url: null
+    messenger:
+        # Enabled by default with installed symfony/messenger and not installed symfony/symfony.
+        enabled: false

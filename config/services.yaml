@@ -3,7 +3,7 @@ services:
         autowire: true
         autoconfigure: true 
         bind:
-            # $appVersion: '%env(APP_VERSION)%'
+            $appVersion: '%env(APP_VERSION)%'
 
     App\:
         resource: '../src/*'
@@ -12,3 +12,8 @@ services:
     App\Controller\:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
+
+    monolog.formatter.json:
+        alias: 'App\Logger\Formatter\JsonFormatter'
+        
+    ElevenLabs\Api\Factory\SwaggerSchemaFactory: ~

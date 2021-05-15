@@ -1,5 +1,6 @@
 {
-    "openapi": "3.0.2",
+    "swagger": "2.0",
+    "basePath": "/",
     "info": {
         "title": "TMP Api",
         "version": "1.0.0"
@@ -11,113 +12,20 @@
                     "TeamUser"
                 ],
                 "operationId": "getTeamUserCollection",
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Retrieves the collection of TeamUser resources.",
                 "responses": {
                     "200": {
                         "description": "TeamUser collection response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_blameable_timestampable"
-                                    }
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_blameable_timestampable"
-                                    }
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "hydra:member": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/TeamUser.jsonld-teamUser-base_teamUser-list_blameable_timestampable"
-                                            }
-                                        },
-                                        "hydra:totalItems": {
-                                            "type": "integer",
-                                            "minimum": 0
-                                        },
-                                        "hydra:view": {
-                                            "type": "object",
-                                            "properties": {
-                                                "@id": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                },
-                                                "@type": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:first": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                },
-                                                "hydra:last": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                },
-                                                "hydra:next": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                }
-                                            }
-                                        },
-                                        "hydra:search": {
-                                            "type": "object",
-                                            "properties": {
-                                                "@type": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:template": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:variableRepresentation": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:mapping": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "@type": {
-                                                                "type": "string"
-                                                            },
-                                                            "variable": {
-                                                                "type": "string"
-                                                            },
-                                                            "property": {
-                                                                "type": "string",
-                                                                "nullable": true
-                                                            },
-                                                            "required": {
-                                                                "type": "boolean"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "required": [
-                                        "hydra:member"
-                                    ]
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_blameable_timestampable"
-                                    }
-                                }
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TeamUser-teamUser-base_teamUser-list_blameable_timestampable"
                             }
                         }
                     }
@@ -128,21 +36,14 @@
                         "in": "query",
                         "required": false,
                         "description": "The collection page number",
-                        "schema": {
-                            "type": "integer",
-                            "default": 1
-                        }
+                        "type": "integer"
                     },
                     {
                         "name": "itemsPerPage",
                         "in": "query",
                         "required": false,
                         "description": "The number of items per page",
-                        "schema": {
-                            "type": "integer",
-                            "default": 30,
-                            "minimum": 0
-                        }
+                        "type": "integer"
                     }
                 ]
             },
@@ -151,40 +52,24 @@
                     "TeamUser"
                 ],
                 "operationId": "postTeamUserCollection",
+                "consumes": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Creates a TeamUser resource.",
                 "responses": {
                     "201": {
                         "description": "TeamUser resource created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser.jsonld-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            }
-                        },
-                        "links": {
-                            "GetTeamUserItem": {
-                                "parameters": {
-                                    "id": "$response.body#/id"
-                                },
-                                "operationId": "getTeamUserItem",
-                                "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /team_users/{id}`."
-                            }
+                        "schema": {
+                            "$ref": "#/definitions/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
                         }
                     },
                     "400": {
@@ -197,31 +82,16 @@
                         "description": "Unprocessable entity"
                     }
                 },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TeamUser-teamUser-write"
-                            }
-                        },
-                        "application/hal+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TeamUser-teamUser-write"
-                            }
-                        },
-                        "application/ld+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TeamUser.jsonld-teamUser-write"
-                            }
-                        },
-                        "text/html": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TeamUser-teamUser-write"
-                            }
+                "parameters": [
+                    {
+                        "name": "teamUser",
+                        "in": "body",
+                        "description": "The new TeamUser resource",
+                        "schema": {
+                            "$ref": "#/definitions/TeamUser-teamUser-write"
                         }
-                    },
-                    "description": "The new TeamUser resource"
-                }
+                    }
+                ]
             }
         },
         "/team_users/{id}": {
@@ -230,41 +100,26 @@
                     "TeamUser"
                 ],
                 "operationId": "getTeamUserItem",
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Retrieves a TeamUser resource.",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "TeamUser resource response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser.jsonld-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            }
+                        "schema": {
+                            "$ref": "#/definitions/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
                         }
                     },
                     "404": {
@@ -277,41 +132,40 @@
                     "TeamUser"
                 ],
                 "operationId": "putTeamUserItem",
+                "consumes": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Replaces the TeamUser resource.",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "teamUser",
+                        "in": "body",
+                        "description": "The updated TeamUser resource",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/TeamUser-teamUser-write"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "TeamUser resource updated",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser.jsonld-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
-                                }
-                            }
+                        "schema": {
+                            "$ref": "#/definitions/TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable"
                         }
                     },
                     "400": {
@@ -323,31 +177,6 @@
                     "422": {
                         "description": "Unprocessable entity"
                     }
-                },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TeamUser-teamUser-write"
-                            }
-                        },
-                        "application/hal+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TeamUser-teamUser-write"
-                            }
-                        },
-                        "application/ld+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TeamUser.jsonld-teamUser-write"
-                            }
-                        },
-                        "text/html": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TeamUser-teamUser-write"
-                            }
-                        }
-                    },
-                    "description": "The updated TeamUser resource"
                 }
             },
             "delete": {
@@ -369,9 +198,7 @@
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     }
                 ]
             }
@@ -382,113 +209,20 @@
                     "Team"
                 ],
                 "operationId": "getTeamCollection",
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Retrieves the collection of Team resources.",
                 "responses": {
                     "200": {
                         "description": "Team collection response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Team-team-base_team-list_blameable_timestampable"
-                                    }
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Team-team-base_team-list_blameable_timestampable"
-                                    }
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "hydra:member": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/Team.jsonld-team-base_team-list_blameable_timestampable"
-                                            }
-                                        },
-                                        "hydra:totalItems": {
-                                            "type": "integer",
-                                            "minimum": 0
-                                        },
-                                        "hydra:view": {
-                                            "type": "object",
-                                            "properties": {
-                                                "@id": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                },
-                                                "@type": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:first": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                },
-                                                "hydra:last": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                },
-                                                "hydra:next": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                }
-                                            }
-                                        },
-                                        "hydra:search": {
-                                            "type": "object",
-                                            "properties": {
-                                                "@type": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:template": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:variableRepresentation": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:mapping": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "@type": {
-                                                                "type": "string"
-                                                            },
-                                                            "variable": {
-                                                                "type": "string"
-                                                            },
-                                                            "property": {
-                                                                "type": "string",
-                                                                "nullable": true
-                                                            },
-                                                            "required": {
-                                                                "type": "boolean"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "required": [
-                                        "hydra:member"
-                                    ]
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Team-team-base_team-list_blameable_timestampable"
-                                    }
-                                }
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Team-team-base_team-list_blameable_timestampable"
                             }
                         }
                     }
@@ -499,21 +233,14 @@
                         "in": "query",
                         "required": false,
                         "description": "The collection page number",
-                        "schema": {
-                            "type": "integer",
-                            "default": 1
-                        }
+                        "type": "integer"
                     },
                     {
                         "name": "itemsPerPage",
                         "in": "query",
                         "required": false,
                         "description": "The number of items per page",
-                        "schema": {
-                            "type": "integer",
-                            "default": 30,
-                            "minimum": 0
-                        }
+                        "type": "integer"
                     }
                 ]
             },
@@ -522,40 +249,24 @@
                     "Team"
                 ],
                 "operationId": "postTeamCollection",
+                "consumes": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Creates a Team resource.",
                 "responses": {
                     "201": {
                         "description": "Team resource created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team.jsonld-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            }
-                        },
-                        "links": {
-                            "GetTeamItem": {
-                                "parameters": {
-                                    "slug": "$response.body#/slug"
-                                },
-                                "operationId": "getTeamItem",
-                                "description": "The `slug` value returned in the response can be used as the `slug` parameter in `GET /teams/{slug}`."
-                            }
+                        "schema": {
+                            "$ref": "#/definitions/Team-team-base_team-list_team-details_blameable_timestampable"
                         }
                     },
                     "400": {
@@ -568,31 +279,16 @@
                         "description": "Unprocessable entity"
                     }
                 },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Team-team-write"
-                            }
-                        },
-                        "application/hal+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Team-team-write"
-                            }
-                        },
-                        "application/ld+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Team.jsonld-team-write"
-                            }
-                        },
-                        "text/html": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Team-team-write"
-                            }
+                "parameters": [
+                    {
+                        "name": "team",
+                        "in": "body",
+                        "description": "The new Team resource",
+                        "schema": {
+                            "$ref": "#/definitions/Team-team-write"
                         }
-                    },
-                    "description": "The new Team resource"
-                }
+                    }
+                ]
             }
         },
         "/teams/{slug}": {
@@ -601,41 +297,26 @@
                     "Team"
                 ],
                 "operationId": "getTeamItem",
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Retrieves a Team resource.",
                 "parameters": [
                     {
                         "name": "slug",
                         "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Team resource response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team.jsonld-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            }
+                        "schema": {
+                            "$ref": "#/definitions/Team-team-base_team-list_team-details_blameable_timestampable"
                         }
                     },
                     "404": {
@@ -648,41 +329,40 @@
                     "Team"
                 ],
                 "operationId": "putTeamItem",
+                "consumes": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Replaces the Team resource.",
                 "parameters": [
                     {
                         "name": "slug",
                         "in": "path",
                         "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "team",
+                        "in": "body",
+                        "description": "The updated Team resource",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/Team-team-write"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Team resource updated",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team.jsonld-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Team-team-base_team-list_team-details_blameable_timestampable"
-                                }
-                            }
+                        "schema": {
+                            "$ref": "#/definitions/Team-team-base_team-list_team-details_blameable_timestampable"
                         }
                     },
                     "400": {
@@ -694,31 +374,6 @@
                     "422": {
                         "description": "Unprocessable entity"
                     }
-                },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Team-team-write"
-                            }
-                        },
-                        "application/hal+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Team-team-write"
-                            }
-                        },
-                        "application/ld+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Team.jsonld-team-write"
-                            }
-                        },
-                        "text/html": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Team-team-write"
-                            }
-                        }
-                    },
-                    "description": "The updated Team resource"
                 }
             },
             "delete": {
@@ -740,9 +395,7 @@
                         "name": "slug",
                         "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     }
                 ]
             }
@@ -753,113 +406,20 @@
                     "User"
                 ],
                 "operationId": "getUserCollection",
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Retrieves the collection of User resources.",
                 "responses": {
                     "200": {
                         "description": "User collection response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/User-user-list_soft-deletable_timestampable"
-                                    }
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/User-user-list_soft-deletable_timestampable"
-                                    }
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "hydra:member": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/User.jsonld-user-list_soft-deletable_timestampable"
-                                            }
-                                        },
-                                        "hydra:totalItems": {
-                                            "type": "integer",
-                                            "minimum": 0
-                                        },
-                                        "hydra:view": {
-                                            "type": "object",
-                                            "properties": {
-                                                "@id": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                },
-                                                "@type": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:first": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                },
-                                                "hydra:last": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                },
-                                                "hydra:next": {
-                                                    "type": "string",
-                                                    "format": "iri-reference"
-                                                }
-                                            }
-                                        },
-                                        "hydra:search": {
-                                            "type": "object",
-                                            "properties": {
-                                                "@type": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:template": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:variableRepresentation": {
-                                                    "type": "string"
-                                                },
-                                                "hydra:mapping": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "@type": {
-                                                                "type": "string"
-                                                            },
-                                                            "variable": {
-                                                                "type": "string"
-                                                            },
-                                                            "property": {
-                                                                "type": "string",
-                                                                "nullable": true
-                                                            },
-                                                            "required": {
-                                                                "type": "boolean"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "required": [
-                                        "hydra:member"
-                                    ]
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/User-user-list_soft-deletable_timestampable"
-                                    }
-                                }
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User-user-list_soft-deletable_timestampable"
                             }
                         }
                     }
@@ -870,21 +430,14 @@
                         "in": "query",
                         "required": false,
                         "description": "The collection page number",
-                        "schema": {
-                            "type": "integer",
-                            "default": 1
-                        }
+                        "type": "integer"
                     },
                     {
                         "name": "itemsPerPage",
                         "in": "query",
                         "required": false,
                         "description": "The number of items per page",
-                        "schema": {
-                            "type": "integer",
-                            "default": 30,
-                            "minimum": 0
-                        }
+                        "type": "integer"
                     }
                 ]
             },
@@ -893,40 +446,24 @@
                     "User"
                 ],
                 "operationId": "postUserCollection",
+                "consumes": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Creates a User resource.",
                 "responses": {
                     "201": {
                         "description": "User resource created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonld-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            }
-                        },
-                        "links": {
-                            "GetUserItem": {
-                                "parameters": {
-                                    "slug": "$response.body#/slug"
-                                },
-                                "operationId": "getUserItem",
-                                "description": "The `slug` value returned in the response can be used as the `slug` parameter in `GET /users/{slug}`."
-                            }
+                        "schema": {
+                            "$ref": "#/definitions/User-user-list_user-details_soft-deletable_timestampable"
                         }
                     },
                     "400": {
@@ -939,31 +476,16 @@
                         "description": "Unprocessable entity"
                     }
                 },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User-user-write"
-                            }
-                        },
-                        "application/hal+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User-user-write"
-                            }
-                        },
-                        "application/ld+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User.jsonld-user-write"
-                            }
-                        },
-                        "text/html": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User-user-write"
-                            }
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The new User resource",
+                        "schema": {
+                            "$ref": "#/definitions/User-user-write"
                         }
-                    },
-                    "description": "The new User resource"
-                }
+                    }
+                ]
             }
         },
         "/users/{slug}": {
@@ -972,41 +494,26 @@
                     "User"
                 ],
                 "operationId": "getUserItem",
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Retrieves a User resource.",
                 "parameters": [
                     {
                         "name": "slug",
                         "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "User resource response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonld-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            }
+                        "schema": {
+                            "$ref": "#/definitions/User-user-list_user-details_soft-deletable_timestampable"
                         }
                     },
                     "404": {
@@ -1019,41 +526,40 @@
                     "User"
                 ],
                 "operationId": "putUserItem",
+                "consumes": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
                 "summary": "Replaces the User resource.",
                 "parameters": [
                     {
                         "name": "slug",
                         "in": "path",
                         "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The updated User resource",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/User-user-write"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "User resource updated",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            },
-                            "application/hal+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            },
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User.jsonld-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User-user-list_user-details_soft-deletable_timestampable"
-                                }
-                            }
+                        "schema": {
+                            "$ref": "#/definitions/User-user-list_user-details_soft-deletable_timestampable"
                         }
                     },
                     "400": {
@@ -1065,31 +571,6 @@
                     "422": {
                         "description": "Unprocessable entity"
                     }
-                },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User-user-write"
-                            }
-                        },
-                        "application/hal+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User-user-write"
-                            }
-                        },
-                        "application/ld+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User.jsonld-user-write"
-                            }
-                        },
-                        "text/html": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User-user-write"
-                            }
-                        }
-                    },
-                    "description": "The updated User resource"
                 }
             },
             "delete": {
@@ -1111,997 +592,417 @@
                         "name": "slug",
                         "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     }
                 ]
             }
         }
     },
-    "components": {
-        "schemas": {
-            "Team-team-base_team-list_blameable_timestampable": {
-                "type": "object",
-                "description": "Class Team.",
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "modifiedBy": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "Team-team-base_team-list_team-details_blameable_timestampable": {
-                "type": "object",
-                "description": "Class Team.",
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "teamUsers": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TeamUser-team-base_team-list_team-details_blameable_timestampable"
-                        }
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "modifiedBy": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "Team-team-write": {
-                "type": "object",
-                "description": "Class Team.",
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "teamUsers": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    }
-                }
-            },
-            "Team-user-list_user-details_soft-deletable_timestampable": {
-                "type": "object",
-                "description": "Class Team.",
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateDeleted": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "deletedBy": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                }
-            },
-            "Team.jsonld-team-base_team-list_blameable_timestampable": {
-                "type": "object",
-                "description": "Class Team.",
-                "properties": {
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "modifiedBy": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "Team.jsonld-team-base_team-list_team-details_blameable_timestampable": {
-                "type": "object",
-                "description": "Class Team.",
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "teamUsers": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TeamUser.jsonld-team-base_team-list_team-details_blameable_timestampable"
-                        }
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "modifiedBy": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "Team.jsonld-team-write": {
-                "type": "object",
-                "description": "Class Team.",
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "teamUsers": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    }
-                }
-            },
-            "Team.jsonld-user-list_user-details_soft-deletable_timestampable": {
-                "type": "object",
-                "description": "Class Team.",
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateDeleted": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "deletedBy": {
-                        "type": "string",
-                        "nullable": true
-                    }
-                }
-            },
-            "TeamUser-team-base_team-list_team-details_blameable_timestampable": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "user": {
-                        "$ref": "#/components/schemas/User-team-base_team-list_team-details_blameable_timestampable"
-                    },
-                    "roles": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "modifiedBy": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "TeamUser-teamUser-base_teamUser-list_blameable_timestampable": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "modifiedBy": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "modifiedBy": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "TeamUser-teamUser-write": {
-                "type": "object",
-                "description": "Class TeamUser."
-            },
-            "TeamUser-user-list_soft-deletable_timestampable": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "TeamUser-user-list_user-details_soft-deletable_timestampable": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "team": {
-                        "nullable": true,
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/Team-user-list_user-details_soft-deletable_timestampable"
-                            }
-                        ]
-                    },
-                    "roles": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "TeamUser.jsonld-team-base_team-list_team-details_blameable_timestampable": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "user": {
-                        "$ref": "#/components/schemas/User.jsonld-team-base_team-list_team-details_blameable_timestampable"
-                    },
-                    "roles": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "modifiedBy": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "TeamUser.jsonld-teamUser-base_teamUser-list_blameable_timestampable": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "modifiedBy": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "TeamUser.jsonld-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "createdBy": {
-                        "type": "string"
-                    },
-                    "modifiedBy": {
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "TeamUser.jsonld-teamUser-write": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    }
-                }
-            },
-            "TeamUser.jsonld-user-list_soft-deletable_timestampable": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "TeamUser.jsonld-user-list_user-details_soft-deletable_timestampable": {
-                "type": "object",
-                "description": "Class TeamUser.",
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "team": {
-                        "nullable": true,
-                        "anyOf": [
-                            {
-                                "$ref": "#/components/schemas/Team.jsonld-user-list_user-details_soft-deletable_timestampable"
-                            }
-                        ]
-                    },
-                    "roles": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                }
-            },
-            "User-team-base_team-list_team-details_blameable_timestampable": {
-                "type": "object",
-                "description": "Class User.",
-                "externalDocs": {
-                    "url": "https://schema.org/Person"
+    "security": [
+        {
+            "apiKey": []
+        }
+    ],
+    "securityDefinitions": {
+        "apiKey": {
+            "type": "apiKey",
+            "in": "header",
+            "description": "Value for the Authorization header",
+            "name": "Authorization"
+        }
+    },
+    "definitions": {
+        "Team-team-base_team-list_blameable_timestampable": {
+            "type": "object",
+            "description": "Class Team.",
+            "properties": {
+                "title": {
+                    "type": "string"
                 },
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "lastLogin": {
+                "description": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "createdBy": {
+                    "type": "string"
+                },
+                "modifiedBy": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Team-team-base_team-list_team-details_blameable_timestampable": {
+            "type": "object",
+            "description": "Class Team.",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "teamUsers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TeamUser-team-base_team-list_team-details_blameable_timestampable"
+                    }
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "createdBy": {
+                    "type": "string"
+                },
+                "modifiedBy": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Team-team-write": {
+            "type": "object",
+            "description": "Class Team.",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "teamUsers": {
+                    "type": "array",
+                    "items": {
                         "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
+                        "format": "iri-reference"
                     }
                 }
-            },
-            "User-user-list_soft-deletable_timestampable": {
-                "type": "object",
-                "description": "Class User.",
-                "externalDocs": {
-                    "url": "https://schema.org/Person"
+            }
+        },
+        "Team-user-list_user-details_soft-deletable_timestampable": {
+            "type": "object",
+            "description": "Class Team.",
+            "properties": {
+                "title": {
+                    "type": "string"
                 },
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "roles": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "teamUsers": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TeamUser-user-list_soft-deletable_timestampable"
-                        }
-                    },
-                    "status": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "lastLogin": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateDeleted": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "deletedBy": {
-                        "type": "string",
-                        "nullable": true
-                    }
+                "description": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateDeleted": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "deletedBy": {
+                    "type": "string"
                 }
-            },
-            "User-user-list_user-details_soft-deletable_timestampable": {
-                "type": "object",
-                "description": "Class User.",
-                "externalDocs": {
-                    "url": "https://schema.org/Person"
+            }
+        },
+        "TeamUser-team-base_team-list_team-details_blameable_timestampable": {
+            "type": "object",
+            "description": "Class TeamUser.",
+            "properties": {
+                "user": {
+                    "$ref": "#/definitions/User-team-base_team-list_team-details_blameable_timestampable"
                 },
-                "properties": {
-                    "email": {
+                "roles": {
+                    "type": "array",
+                    "items": {
                         "type": "string"
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "roles": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "teamUsers": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TeamUser-user-list_user-details_soft-deletable_timestampable"
-                        }
-                    },
-                    "status": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "lastLogin": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateDeleted": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "deletedBy": {
-                        "type": "string",
-                        "nullable": true
                     }
-                }
-            },
-            "User-user-write": {
-                "type": "object",
-                "description": "Class User.",
-                "externalDocs": {
-                    "url": "https://schema.org/Person"
                 },
-                "properties": {
-                    "email": {
+                "createdBy": {
+                    "type": "string"
+                },
+                "modifiedBy": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "TeamUser-teamUser-base_teamUser-list_blameable_timestampable": {
+            "type": "object",
+            "description": "Class TeamUser.",
+            "properties": {
+                "createdBy": {
+                    "type": "string"
+                },
+                "modifiedBy": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "TeamUser-teamUser-base_teamUser-list_teamUser-details_blameable_timestampable": {
+            "type": "object",
+            "description": "Class TeamUser.",
+            "properties": {
+                "createdBy": {
+                    "type": "string"
+                },
+                "modifiedBy": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "TeamUser-teamUser-write": {
+            "type": "object",
+            "description": "Class TeamUser."
+        },
+        "TeamUser-user-list_soft-deletable_timestampable": {
+            "type": "object",
+            "description": "Class TeamUser.",
+            "properties": {
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "TeamUser-user-list_user-details_soft-deletable_timestampable": {
+            "type": "object",
+            "description": "Class TeamUser.",
+            "properties": {
+                "team": {
+                    "$ref": "#/definitions/Team-user-list_user-details_soft-deletable_timestampable"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
                         "type": "string"
-                    },
-                    "teamUsers": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
                     }
-                }
-            },
-            "User.jsonld-team-base_team-list_team-details_blameable_timestampable": {
-                "type": "object",
-                "description": "Class User.",
-                "externalDocs": {
-                    "url": "https://schema.org/Person"
                 },
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "User-team-base_team-list_team-details_blameable_timestampable": {
+            "type": "object",
+            "description": "Class User.",
+            "externalDocs": {
+                "url": "https://schema.org/Person"
+            },
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "lastLogin": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "User-user-list_soft-deletable_timestampable": {
+            "type": "object",
+            "description": "Class User.",
+            "externalDocs": {
+                "url": "https://schema.org/Person"
+            },
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
                         "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "lastLogin": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
                     }
-                }
-            },
-            "User.jsonld-user-list_soft-deletable_timestampable": {
-                "type": "object",
-                "description": "Class User.",
-                "externalDocs": {
-                    "url": "https://schema.org/Person"
                 },
-                "properties": {
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "roles": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "teamUsers": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TeamUser.jsonld-user-list_soft-deletable_timestampable"
-                        }
-                    },
-                    "status": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "lastLogin": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateDeleted": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "deletedBy": {
-                        "type": "string",
-                        "nullable": true
+                "teamUsers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TeamUser-user-list_soft-deletable_timestampable"
                     }
-                }
-            },
-            "User.jsonld-user-list_user-details_soft-deletable_timestampable": {
-                "type": "object",
-                "description": "Class User.",
-                "externalDocs": {
-                    "url": "https://schema.org/Person"
                 },
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
+                "status": {
+                    "type": "object",
+                    "items": {
                         "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "slug": {
-                        "type": "string"
-                    },
-                    "roles": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "teamUsers": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TeamUser.jsonld-user-list_user-details_soft-deletable_timestampable"
-                        }
-                    },
-                    "status": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "lastLogin": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "dateCreated": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateModified": {
-                        "readOnly": true,
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "dateDeleted": {
-                        "type": "string",
-                        "format": "date-time",
-                        "nullable": true
-                    },
-                    "deletedBy": {
-                        "type": "string",
-                        "nullable": true
                     }
-                }
-            },
-            "User.jsonld-user-write": {
-                "type": "object",
-                "description": "Class User.",
-                "externalDocs": {
-                    "url": "https://schema.org/Person"
                 },
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
+                "lastLogin": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateDeleted": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "deletedBy": {
+                    "type": "string"
+                }
+            }
+        },
+        "User-user-list_user-details_soft-deletable_timestampable": {
+            "type": "object",
+            "description": "Class User.",
+            "externalDocs": {
+                "url": "https://schema.org/Person"
+            },
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
                         "type": "string"
-                    },
-                    "@id": {
-                        "readOnly": true,
+                    }
+                },
+                "teamUsers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TeamUser-user-list_user-details_soft-deletable_timestampable"
+                    }
+                },
+                "status": {
+                    "type": "object",
+                    "items": {
                         "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "teamUsers": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
+                    }
+                },
+                "lastLogin": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateCreated": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateModified": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "dateDeleted": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "deletedBy": {
+                    "type": "string"
+                }
+            }
+        },
+        "User-user-write": {
+            "type": "object",
+            "description": "Class User.",
+            "externalDocs": {
+                "url": "https://schema.org/Person"
+            },
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "teamUsers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "iri-reference"
                     }
                 }
             }

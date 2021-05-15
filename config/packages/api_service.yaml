@@ -1,0 +1,8 @@
+# API Services
+api_service:
+    pagination:
+        hal:
+            page: null
+            perPage: itemsPerPage
+            totalPages: null
+            totalItems: totalItems
