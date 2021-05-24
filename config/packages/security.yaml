@@ -1,15 +1,22 @@
 security:
     encoders:
-        App\Entity\User: bcrypt
+        App\Entity\User:
+            algorithm: auto
         Symfony\Component\Security\Core\User\User: plaintext
+
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+        # used to reload user from session & other features (e.g. switch_user)
+
     
     role_hierarchy:
         ROLE_SUPER_ADMIN:  [ROLE_ADMIN]
         ROLE_ADMIN: ROLE_USER
 
-    providers:
-        adriver_oauth:
-            id: App\Security\Provider\AuthJwtUserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -23,12 +30,42 @@ security:
             pattern: ^/state$
             security: false
 
+        login:
+            pattern: ^/login_check$
+            stateless: true
+            anonymous: true
+            provider: app_user_provider
+            form_login:
+                check_path: /login_check
+                username_parameter: username
+                password_parameter: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern: ^/
+            stateless: true
+            security: true
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     ^/
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         # main:
-        #     pattern: ^/
-        #     provider: adriver_oauth
-        #     stateless: true
-        #     guard:
-        #         authenticators:
-        #             - App\Security\Authenticator\JwtGuardAuthenticator
+            # anonymous: true
+            # provider: app_user_provider
+            # json_login:
+            #     check_path: api_login
+            #     success_handler: 
+            # json_login:
+            #     check_path: app_login
+            # logout: 
+            #     path: app_logout
+            # guard:
+            #     authenticators:
+            #         - App\Security\AppAuthenticator
+
     access_control:
         # - { path: ^/, roles: ROLE_USER }
