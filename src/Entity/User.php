@@ -28,8 +28,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      }
  *     },
  *     itemOperations={
+ *      "me"={
+ *          "normalization_context"={"groups"={"user-list", "soft-deletable", "timestampable"}},
+ *          "security"="is_granted('ROLE_ADMIN') or object == user"
+ *      },
  *      "get"={
- *          "normalization_context"={"groups"={"user-list", "user-details", "soft-deletable", "timestampable"}}
+ *          "normalization_context"={"groups"={"user-list", "user-details", "soft-deletable", "timestampable"}},
+ *          "security"="is_granted('ROLE_ADMIN') or object == user"
  *      },
  *      "put"={
  *          "normalization_context"={"groups"={"user-list", "user-details", "soft-deletable", "timestampable"}},
@@ -293,6 +298,11 @@ class User implements UserInterface
     public function hasStatus(string $status): bool
     {
         return !empty($this->status[$status]);
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
     }
 
     public function setToken(?string $token): self

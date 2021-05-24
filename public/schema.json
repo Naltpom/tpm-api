@@ -6,6 +6,40 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/me": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "meUserItem",
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "application/ld+json",
+                    "text/html"
+                ],
+                "summary": "Retrieves a User resource.",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User resource response",
+                        "schema": {
+                            "$ref": "#/definitions/User-user-list_soft-deletable_timestampable"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        },
         "/team_users": {
             "get": {
                 "tags": [
@@ -595,6 +629,56 @@
                         "type": "string"
                     }
                 ]
+            }
+        },
+        "/login_check": {
+            "post": {
+                "tags": [
+                    "Jwt Token"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "operationId": "getAccessToken",
+                "summary": "Get Access Token",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "username",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "password",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "token": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An Error have been throw",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
             }
         }
     },
