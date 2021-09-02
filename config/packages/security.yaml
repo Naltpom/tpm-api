@@ -11,7 +11,9 @@ security:
                 class: App\Entity\User
                 property: email
         # used to reload user from session & other features (e.g. switch_user)
-
+        jwt:
+            lexik_jwt: 
+                class: App\Entity\User
     
     role_hierarchy:
         ROLE_SUPER_ADMIN:  [ROLE_ADMIN]
@@ -30,29 +32,36 @@ security:
             pattern: ^/state$
             security: false
 
-        login:
-            pattern: ^/login_check$
-            stateless: true
+        main:
             anonymous: true
             provider: app_user_provider
-            form_login:
-                check_path: /login_check
-                username_parameter: username
-                password_parameter: password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            guard: 
+                authenticators: 
+                    - App\Security\ApiKeyAuthenticator
+        # login:
+        #     pattern: ^/login_check$
+        #     stateless: true
+        #     anonymous: true
+        #     provider: app_user_provider
+        #     form_login:
+        #         check_path: /login_check
+        #         username_parameter: username
+        #         password_parameter: password
+        #         success_handler: lexik_jwt_authentication.handler.authentication_success
+        #         failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
-        api:
-            pattern: ^/
-            stateless: true
-            security: true
-            remember_me:
-                secret:   '%kernel.secret%'
-                lifetime: 604800 # 1 week in seconds
-                path:     ^/
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+        # api:
+        #     pattern: ^/
+        #     stateless: true
+        #     security: true
+        #     provider: jwt
+        #     remember_me:
+        #         secret:   '%kernel.secret%'
+        #         lifetime: 604800 # 1 week in seconds
+        #         path:     ^/
+        #     guard:
+        #         authenticators:
+        #             - lexik_jwt_authentication.jwt_token_authenticator
         # main:
             # anonymous: true
             # provider: app_user_provider

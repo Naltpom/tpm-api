@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -52,7 +53,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *
  * @ORM\Entity()
  */
-class User implements UserInterface
+class User implements UserInterface, JWTUserInterface
 {
     use Behavior\TimestampableTrait;
     use Behavior\SoftDeletableTrait;
@@ -151,6 +152,11 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $lastLogin;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $apiKey;
 
     public function __construct()
     {
@@ -320,6 +326,31 @@ class User implements UserInterface
     public function setLastLogin(?\DateTime $lastLogin): self
     {
         $this->lastLogin = $lastLogin;
+
+        return $this;
+    }
+
+    /**
+     * Creates a new instance from a given JWT payload.
+     *
+     * @param string $username
+     *
+     * @return JWTUserInterface
+     */
+    public static function createFromPayload($username, array $payload) {
+        $user = new User();
+        $user->setEmail($username);
+        return $payload;
+    }
+
+    public function getApiKey(): ?string
+    {
+        return $this->apiKey;
+    }
+
+    public function setApiKey(?string $apiKey): self
+    {
+        $this->apiKey = $apiKey;
 
         return $this;
     }

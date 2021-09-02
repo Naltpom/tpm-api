@@ -26,13 +26,6 @@ class MeController
     {
         $user = $this->security->getUser();
 
-        $json = [
-            'username' => $user->getUsername(),
-            'roles' => $user->getRoles(),
-            'status' => $user->getStatus(),
-            'token' => $user->getToken(),
-        ];
-
-        return new JsonResponse($json) ;
+        return new JsonResponse($user) ;
     }
 }
